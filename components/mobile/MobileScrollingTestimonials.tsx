@@ -1,11 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ExternalLink } from "lucide-react"
+import { ChevronDown, ExternalLink } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { smoothScrollToTop } from "@/utils/smoothScroll"
 
@@ -59,13 +58,17 @@ const testimonials = [
 ]
 
 export default function MobileScrollingTestimonials() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
   const router = useRouter()
 
   const handleNavClick = (href: string) => (e: React.MouseEvent) => {
     e.preventDefault()
     router.push(href)
     smoothScrollToTop()
+  }
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index)
   }
 
   return (
@@ -93,26 +96,12 @@ export default function MobileScrollingTestimonials() {
 
       {/* Testimonials Grid */}
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-4">
           {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              className="relative"
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Quote Bubble */}
-              <div className="bg-white text-black p-6 rounded-2xl mb-4 relative">
-                <p className="text-lg">{testimonial.quote}</p>
-                {/* Triangle */}
-                <div className="absolute -bottom-4 left-8 w-0 h-0 border-l-[8px] border-l-transparent border-t-[16px] border-t-white border-r-[8px] border-r-transparent" />
-              </div>
-
-              {/* Avatar, Name, and Link */}
-              <div className="flex items-center gap-4">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden">
+            <div key={index} className="bg-zinc-900 rounded-lg overflow-hidden">
+              {/* Header - Always visible */}
+              <div className="flex items-center gap-4 p-4 cursor-pointer" onClick={() => toggleExpand(index)}>
+                <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src={testimonial.image || "/placeholder.svg"}
                     alt={testimonial.name}
@@ -120,18 +109,35 @@ export default function MobileScrollingTestimonials() {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex items-center gap-2">
-                  <p className="font-medium">{testimonial.name}</p>
+                <div className="flex-grow">
+                  <h3 className="font-medium text-white">{testimonial.name}</h3>
+                </div>
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform ${expandedIndex === index ? "rotate-180" : ""}`}
+                />
+              </div>
+
+              {/* Expandable Content */}
+              <motion.div
+                initial={false}
+                animate={{
+                  height: expandedIndex === index ? "auto" : 0,
+                  opacity: expandedIndex === index ? 1 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="p-4 pt-0">
+                  <p className="text-gray-300 mb-4">{testimonial.quote}</p>
                   <button
                     onClick={handleNavClick(testimonial.link)}
-                    className="text-[#e3f677] hover:text-white transition-colors"
-                    aria-label={`View ${testimonial.name}'s full review`}
+                    className="text-[#e3f677] hover:text-white transition-colors flex items-center gap-2 text-sm"
                   >
-                    <ExternalLink size={16} />
+                    View full review <ExternalLink size={14} />
                   </button>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>

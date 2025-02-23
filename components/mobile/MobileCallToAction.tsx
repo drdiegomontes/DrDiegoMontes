@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { smoothScrollToTop } from "@/utils/smoothScroll"
@@ -18,13 +17,13 @@ export default function MobileCallToAction() {
   return (
     <section className="py-16 bg-black text-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center">
+        <div className="text-center max-w-[280px] mx-auto">
           <h2 className="text-3xl font-light mb-6">Ready to Transform Your Health?</h2>
           <p className="text-lg text-gray-300 mb-8">
             Take the next step towards a healthier, pain-free life with Dr. Diego Montes.
           </p>
           <Button
-            className="bg-white text-black hover:bg-gray-800 rounded-full px-8 py-4 text-lg font-semibold"
+            className="bg-white text-black hover:bg-gray-800 rounded-full px-6 py-3 text-base font-semibold w-auto inline-flex"
             onClick={handleNavClick("/contact")}
           >
             Schedule a Consultation

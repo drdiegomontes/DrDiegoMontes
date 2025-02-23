@@ -56,10 +56,10 @@ export default function MobileFeaturedServices() {
                   holistic approach combines chiropractic care with lifestyle advice to promote long-term health and
                   wellness.
                 </p>
-                <p className="text-lg mb-4">
+                {/* <p className="text-lg mb-4">
                   Experience the difference of personalized care that goes beyond quick fixes, focusing on sustainable
                   health improvements and empowering you to take control of your well-being.
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="w-full relative">
