@@ -1,0 +1,20 @@
+{
+  "name": "Dr. Diego Montes Chiropractic & Wellness",
+  "short_name": "Dr. Montes Wellness",
+  "icons": [
+    {
+      "src": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-app-manifest-192x192-ABPCqbIzbuWWwDv1XiQ5QStdjlhLUN.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-app-manifest-512x512-fLNHdEOmQlEc3aFc4ibZeQMJKeIzur.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
+

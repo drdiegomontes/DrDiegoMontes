@@ -1,0 +1,29 @@
+.scene {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  font-weight: 600;
+  font-size: 2.5em;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.container > span {
+  cursor: pointer;
+  margin-right: 0.15em;
+}
+
+span.active {
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.07em;
+  text-decoration: underline;
+}
+
